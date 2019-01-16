@@ -87,10 +87,12 @@ func TestClient(uid string) {
 			case _ = <-t:
 				fmt.Println("send ttl msg")
 				msg := &smsg.SocketMsg{
-					Command: "sendmessage",
-					Enc:     "no",
-					Content: "heartbeat",
+					Command:   "sendmessage",
+					Enc:       "no",
+					Content:   "heartbeat",
+					SendTimer: time.Now().Format(time.RFC3339Nano),
 				}
+				fmt.Println(msg.String())
 				send <- []byte(msg.String())
 			}
 		}
